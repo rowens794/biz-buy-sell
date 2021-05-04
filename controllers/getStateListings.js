@@ -6,17 +6,57 @@ const Listing = require("../models/Listing");
 exports.getStateListings = async (req, res) => {
   res.send("getting state data");
   let states = [
-    "pennsylvania",
-    "kentucky",
-    "north-carolina",
-    "maryland",
-    "michigan",
+    // "pennsylvania",
+    // "kentucky",
+    // "north-carolina",
+    // "maryland",
+    // "michigan",
+    // "new-york",
+    // "south-carolina",
+    // "ohio",
+    // "west-virginia",
+    // "virginia",
+    // "indiana",
+    // "alabama",
+    // "alaska",
+    // "arizona",
+    // "arkansas",
+    // "california",
+    "colorado",
+    "connecticut",
+    "delaware",
+    "florida",
+    "georgia",
+    "hawaii",
+    "idaho",
+    "illinois",
+    "iowa",
+    "kansas",
+    "louisiana",
+    "maine",
+    "massachusetts",
+    "minnesota",
+    "mississippi",
+    "missouri",
+    "montana",
+    "nebraska",
+    "nevada",
+    "new-hampshire",
+    "new-jersey",
+    "new-mexico",
     "new-york",
-    "south-carolina",
-    "ohio",
-    "west-virginia",
-    "virginia",
-    "indiana",
+    "north-dakota",
+    "oklahoma",
+    "oregon",
+    "rhode-island",
+    "south-dakota",
+    "tennessee",
+    "texas",
+    "utah",
+    "vermont",
+    "washington",
+    "wisconsin",
+    "wyoming",
   ];
 
   for (let j = 0; j < states.length; j++) {
@@ -43,7 +83,7 @@ const getState = (state) => {
       //validate new listings
       if (validateListingsAreNew(allListings, newListings)) {
         allListings = { ...allListings, ...newListings };
-        await pauseExecution(1000);
+        await pauseExecution(100);
 
         //increment starting page
         startingPage += 1;
@@ -100,7 +140,7 @@ const validateListingsAreNew = (allListings, newListings) => {
 const pauseExecution = (base) => {
   let promise = new Promise((resolve, reject) => {
     //pause for random amount of time
-    let pauseTime = Math.random() * 4000 + base;
+    let pauseTime = Math.random() * 2000 + base;
     setTimeout(() => {
       resolve(true);
     }, pauseTime);
