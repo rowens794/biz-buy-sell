@@ -19,6 +19,41 @@ exports.getListings = async (req, res) => {
   console.log("done");
 };
 
+exports.getListingsOne = async (req, res) => {
+  res.send("getting listing1");
+  let statesToFind = Object.keys(states);
+  statesToFind = statesToFind.map((key) => states[key]);
+  statesToFind = statesToFind.slice(0, 25);
+  let listings = await Listing.find({ listingPageScraped: false, state: { $in: statesToFind } });
+  // let listings = await Listing.find({});
+
+  for (let i = 0; i < listings.length; i++) {
+    console.log(`${i} of ${listings.length}`);
+    let listing = listings[i];
+    let pageData = await getLambdaListing(listing.link);
+    if (pageData) await updateListing(listing, pageData);
+    await pauseExecution(250);
+  }
+  console.log("done");
+};
+
+exports.getListingsTwo = async (req, res) => {
+  res.send("getting listing 2");
+  let statesToFind = Object.keys(states);
+  statesToFind = statesToFind.map((key) => states[key]);
+  statesToFind = statesToFind.slice(25, statesToFind.length);
+  let listings = await Listing.find({ listingPageScraped: false, state: { $in: statesToFind } });
+
+  for (let i = 0; i < listings.length; i++) {
+    console.log(`${i} of ${listings.length}`);
+    let listing = listings[i];
+    let pageData = await getLambdaListing(listing.link);
+    if (pageData) await updateListing(listing, pageData);
+    await pauseExecution(250);
+  }
+  console.log("done");
+};
+
 const getListing = (url) => {
   let fullurl = `https://www.bizbuysell.com${url}`;
   let promise = new Promise(async (resolve, reject) => {

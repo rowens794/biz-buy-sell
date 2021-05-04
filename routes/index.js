@@ -2,11 +2,12 @@ var express = require("express");
 var router = express.Router();
 
 const { getStateListings } = require("../controllers/getStateListings");
-const { getListings } = require("../controllers/getListingData");
+const { getListings, getListingsOne, getListingsTwo } = require("../controllers/getListingData");
 const { presentListings } = require("../controllers/presentListings");
 const { searchListings } = require("../controllers/getSearchListings");
 const { cleanListings } = require("../controllers/createCleanListings");
 const { createSheet } = require("../controllers/buildSpreadsheet");
+const { display } = require("../controllers/displayStateRecords");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -21,6 +22,16 @@ router.get("/state", function (req, res, next) {
 /* GET page data. */
 router.get("/singleListings/:state", function (req, res, next) {
   getListings(req, res);
+});
+
+/* GET page data. */
+router.get("/getListingsOne", function (req, res, next) {
+  getListingsOne(req, res);
+});
+
+/* GET page data. */
+router.get("/getListingsTwo", function (req, res, next) {
+  getListingsTwo(req, res);
 });
 
 /* GET page data. */
@@ -41,6 +52,11 @@ router.get("/cleanListings", function (req, res, next) {
 /* GET page data. */
 router.get("/createSheet", function (req, res, next) {
   createSheet(req, res);
+});
+
+/* GET page data. */
+router.get("/displayStatus", function (req, res, next) {
+  display(req, res);
 });
 
 module.exports = router;
