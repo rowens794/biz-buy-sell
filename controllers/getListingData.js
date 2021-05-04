@@ -120,8 +120,8 @@ const updateListing = (listing, pageData) => {
       listing[key] = pageData[key];
     });
 
-    // listing.listingPageScraped = true;
-    // listing.save();
+    listing.listingPageScraped = true;
+    listing.save();
     resolve(true);
   });
   return promise;
