@@ -114,7 +114,6 @@ const pauseExecution = (base) => {
 
 const updateListing = (listing, pageData) => {
   let promise = new Promise(async (resolve, reject) => {
-    console.log(pageData);
     let keys = Object.keys(pageData);
     keys.forEach((key) => {
       listing[key] = pageData[key];
